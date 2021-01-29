@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux';
 interface Song {
   title: string;
   duration: string;
@@ -8,7 +9,7 @@ interface SelectSongAction {
   payload: Song;
 }
 
-export const songsReducer = () => {
+const songsReducer = () => {
   return [
     { title: 'Let Me Down', duration: '4:05' },
     { title: 'Jesus in LA', duration: '3:20' },
@@ -17,9 +18,14 @@ export const songsReducer = () => {
   ];
 };
 
-export const selectSongReducer = (
+const selectSongReducer = (
   selectedSong: Song | null = null,
   action: SelectSongAction
 ) => {
   return action.type === 'SELECT_SONG' ? action.payload : selectedSong;
 };
+
+export default combineReducers({
+  songs: songsReducer,
+  selectedSong: selectSongReducer,
+});
