@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux';
-interface Song {
-  title: string;
-  duration: string;
+import { Song } from '../actions';
+
+interface SelectedSongAction {
+  type: 'SONG_SELECTED';
+  payload: Song;
 }
 
-interface SelectSongAction {
-  type: 'SELECT_SONG';
-  payload: Song;
+export interface State {
+  songs: Song[];
+  selectedSong: Song | null;
 }
 
 const songsReducer = () => {
@@ -18,14 +20,14 @@ const songsReducer = () => {
   ];
 };
 
-const selectSongReducer = (
-  selectedSong: Song | null = null,
-  action: SelectSongAction
+const selectedSongReducer = (
+  selectedSong: State['selectedSong'] = null,
+  action: SelectedSongAction
 ) => {
-  return action.type === 'SELECT_SONG' ? action.payload : selectedSong;
+  return action.type === 'SONG_SELECTED' ? action.payload : selectedSong;
 };
 
 export default combineReducers({
   songs: songsReducer,
-  selectedSong: selectSongReducer,
+  selectedSong: selectedSongReducer,
 });

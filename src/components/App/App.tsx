@@ -1,5 +1,10 @@
 import * as React from 'react';
+import { SongList } from '../SongList';
 
 export const App: React.FC = () => {
-  return <div>Hello, World!</div>;
+  return (
+    <div>
+      <SongList />
+    </div>
+  );
 };
