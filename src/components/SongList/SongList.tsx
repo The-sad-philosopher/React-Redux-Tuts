@@ -1,18 +1,21 @@
-import { Flex, Text } from '@chakra-ui/react';
 import * as React from 'react';
+import { Flex, Text } from '@chakra-ui/react';
 import { connect } from 'react-redux';
 import { State } from '../../reducers';
+import { selectSong, Song } from '../../actions';
 
 interface SongListProps {
   songs: State['songs'];
+  selectSong: (song: Song) => void;
 }
 
 class SongList extends React.Component<SongListProps> {
   renderList() {
-    const { songs } = this.props;
+    const { songs, selectSong } = this.props;
     return songs.map((song) => (
       <Text
         key={song.title}
+        onClick={() => selectSong(song)}
         color="gray.400"
         mt="1rem"
         fontSize="md"
@@ -45,4 +48,4 @@ const mapStateToProps = (state: State) => {
   return { songs: state.songs };
 };
 
-export default connect(mapStateToProps)(SongList);
+export default connect(mapStateToProps, { selectSong })(SongList);

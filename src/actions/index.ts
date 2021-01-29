@@ -4,6 +4,6 @@ export interface Song {
 }
 
 export const selectSong = (song: Song) => ({
-  type: 'SELECT_SONG',
+  type: 'SONG_SELECTED',
   payload: song,
 });
